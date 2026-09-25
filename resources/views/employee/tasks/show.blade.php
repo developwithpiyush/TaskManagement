@@ -145,12 +145,19 @@
                         }
                     );
 
-                    const data = await response.json();
+                    const responseText = await response.text();
+                    let data = {};
+
+                    try {
+                        data = responseText ? JSON.parse(responseText) : {};
+                    } catch {
+                        data = {};
+                    }
 
                     if (!response.ok) {
                         throw new Error(
                             data.message ||
-                            'Unable to update task status.'
+                            `Unable to update task status (${response.status}).`
                         );
                     }
 

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Http\Requests\UpdateTaskStatusRequest;
 use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class TaskController extends Controller
 {
@@ -20,6 +20,23 @@ class TaskController extends Controller
             $query->where('assigned_to', $request->user()->id);
         }
 
+        if ($request->filled('search')) {
+            $search = $request->string('search')->toString();
+
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('project_id')) {
+            $query->where('project_id', $request->integer('project_id'));
+        }
+
+        if ($request->user()->isAdmin() && $request->filled('assigned_to')) {
+            $query->where('assigned_to', $request->integer('assigned_to'));
+        }
+
         if ($request->filled('status')) {
             $query->where('status', $request->string('status')->toString());
         }
@@ -28,7 +45,7 @@ class TaskController extends Controller
             $query->where('priority', $request->string('priority')->toString());
         }
 
-        $tasks = $query->latest()->paginate(10);
+        $tasks = $query->latest()->paginate(10)->withQueryString();
 
         return TaskResource::collection($tasks);
     }
@@ -59,7 +76,7 @@ class TaskController extends Controller
         return new TaskResource($task);
     }
 
-    public function update(UpdateTaskRequest $request,Task $task) 
+    public function update(UpdateTaskRequest $request, Task $task)
     {
         $this->authorize('update', $task);
 
@@ -67,11 +84,24 @@ class TaskController extends Controller
             $request->validated()
         );
 
-        $task->load(['project', 'assignee', 'creator',]);
+        $task->load(['project', 'assignee', 'creator']);
 
         return (new TaskResource($task))
             ->additional([
                 'message' => 'Task updated successfully.',
+            ]);
+    }
+
+    public function updateStatus(UpdateTaskStatusRequest $request, Task $task)
+    {
+        $this->authorize('update', $task);
+
+        $task->update($request->validated());
+        $task->load(['project', 'assignee', 'creator']);
+
+        return (new TaskResource($task))
+            ->additional([
+                'message' => 'Task status updated successfully.',
             ]);
     }
 

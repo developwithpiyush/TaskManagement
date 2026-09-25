@@ -217,6 +217,9 @@ http://127.0.0.1:8000/api/v1/
 | DELETE | `/api/v1/tasks/{id}`        | Delete task        |
 | PATCH  | `/api/v1/tasks/{id}/status` | Update task status |
 
+The task list supports optional `search`, `project_id`, `assigned_to` (admin only),
+`status`, and `priority` query parameters.
+
 Protected API endpoints require authentication.
 
 Example headers:
@@ -233,7 +236,7 @@ The APIs can be tested using **Postman**.
 
 ## AJAX Functionality
 
-Employees can update their assigned task status using AJAX without refreshing the page. Need to just
+Employees can update the status of their assigned tasks using AJAX without refreshing the page.
 
 ---
 

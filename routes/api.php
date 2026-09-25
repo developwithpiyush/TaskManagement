@@ -8,6 +8,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::middleware('auth:sanctum')->group(function () {
+        Route::patch('/tasks/{task}/status', [TaskController::class, 'updateStatus']);
         Route::apiResource('tasks', TaskController::class);
     });
 });

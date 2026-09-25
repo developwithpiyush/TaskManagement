@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
         |--------------------------------------------------------------------------
         */
 
-        Route::prefix('employee')->name('employee.')->group(function () {
+        Route::middleware('employee')->prefix('employee')->name('employee.')->group(function () {
             Route::get('/dashboard', [EmployeeDashboardController::class, 'index'])->name('dashboard');
 
             Route::get('/tasks', [EmployeeTaskController::class, 'index'])->name('tasks.index');
