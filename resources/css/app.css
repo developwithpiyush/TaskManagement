@@ -1,3 +1,234 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	.workspace-shell {
+		min-height: 100vh;
+		background: #f5f7fb;
+		color: #172033;
+	}
+
+	.workspace-header {
+		border-bottom: 1px solid #e4e8f0;
+		background: rgba(255, 255, 255, 0.88);
+		backdrop-filter: blur(12px);
+	}
+
+	.workspace-header-inner {
+		max-width: 80rem;
+		margin: 0 auto;
+		padding: 1.5rem 1rem;
+	}
+
+	.workspace-eyebrow {
+		margin-bottom: 0.35rem;
+		color: #64748b;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.workspace-title {
+		color: #172033;
+		font-size: 1.65rem;
+		font-weight: 750;
+		letter-spacing: -0.025em;
+	}
+
+	.workspace-content {
+		max-width: 80rem;
+		margin: 0 auto;
+		padding: 2rem 1rem 3rem;
+	}
+
+	.workspace-card {
+		border: 1px solid #e4e8f0;
+		border-radius: 0.85rem;
+		background: #fff;
+		box-shadow: 0 10px 30px rgba(30, 41, 59, 0.06);
+	}
+
+	.workspace-card-header {
+		border-bottom: 1px solid #edf0f5;
+		padding: 1.25rem 1.5rem;
+	}
+
+	.workspace-card-header h3 {
+		color: #172033;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	.workspace-button-primary,
+	.workspace-button-secondary,
+	.workspace-button-danger {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 0.55rem;
+		padding: 0.65rem 1rem;
+		font-size: 0.875rem;
+		font-weight: 700;
+		transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+	}
+
+	.workspace-button-primary {
+		background: #2563eb;
+		color: #fff;
+		box-shadow: 0 5px 12px rgba(37, 99, 235, 0.2);
+	}
+
+	.workspace-button-primary:hover {
+		background: #1d4ed8;
+		transform: translateY(-1px);
+	}
+
+	.workspace-button-secondary {
+		background: #eef2f7;
+		color: #475569;
+	}
+
+	.workspace-button-secondary:hover {
+		background: #e2e8f0;
+	}
+
+	.workspace-button-danger {
+		background: #fff1f2;
+		color: #be123c;
+	}
+
+	.workspace-button-danger:hover {
+		background: #ffe4e6;
+	}
+
+	.workspace-stat {
+		position: relative;
+		overflow: hidden;
+		padding: 1.35rem;
+	}
+
+	.workspace-stat::after {
+		position: absolute;
+		right: -1.5rem;
+		bottom: -2rem;
+		width: 6rem;
+		height: 6rem;
+		border-radius: 999px;
+		background: #eff6ff;
+		content: '';
+	}
+
+	.workspace-stat-label {
+		color: #64748b;
+		font-size: 0.78rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+	}
+
+	.workspace-stat-value {
+		position: relative;
+		z-index: 1;
+		margin-top: 0.5rem;
+		color: #172033;
+		font-size: 2rem;
+		font-weight: 750;
+	}
+
+	.workspace-table thead {
+		background: #f8fafc;
+	}
+
+	.workspace-table th {
+		color: #64748b;
+		font-size: 0.68rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.workspace-table tbody tr {
+		transition: background 150ms ease;
+	}
+
+	.workspace-table tbody tr:hover {
+		background: #f8fbff;
+	}
+
+	.workspace-table td {
+		color: #475569;
+		font-size: 0.9rem;
+	}
+
+	.workspace-link {
+		color: #2563eb;
+		font-weight: 700;
+	}
+
+	.workspace-link:hover {
+		color: #1d4ed8;
+	}
+
+	.workspace-badge {
+		display: inline-flex;
+		border-radius: 999px;
+		padding: 0.3rem 0.65rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: capitalize;
+	}
+
+	.workspace-badge-blue { background: #dbeafe; color: #1d4ed8; }
+	.workspace-badge-green { background: #dcfce7; color: #15803d; }
+	.workspace-badge-amber { background: #fef3c7; color: #b45309; }
+	.workspace-badge-red { background: #ffe4e6; color: #be123c; }
+	.workspace-badge-slate { background: #e2e8f0; color: #475569; }
+
+	.workspace-form-card {
+		max-width: 52rem;
+		margin: 0 auto;
+		padding: 1.75rem;
+	}
+
+	.workspace-form-card label {
+		color: #334155;
+		font-size: 0.82rem;
+		font-weight: 700;
+	}
+
+	.workspace-form-card input,
+	.workspace-form-card select,
+	.workspace-form-card textarea,
+	.workspace-filter input,
+	.workspace-filter select {
+		border-color: #d8dee9;
+		border-radius: 0.55rem;
+		background: #fbfcfe;
+		color: #172033;
+		box-shadow: none;
+	}
+
+	.workspace-form-card input:focus,
+	.workspace-form-card select:focus,
+	.workspace-form-card textarea:focus,
+	.workspace-filter input:focus,
+	.workspace-filter select:focus {
+		border-color: #60a5fa;
+		box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+		outline: none;
+	}
+
+	.workspace-filter {
+		padding: 1.25rem;
+	}
+
+	@media (min-width: 640px) {
+		.workspace-header-inner,
+		.workspace-content {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+	}
+}

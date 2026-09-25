@@ -18,6 +18,10 @@ class TaskController extends Controller
             $query->where('status', $request->string('status')->toString());
         }
 
+        if ($request->filled('priority')) {
+            $query->where('priority', $request->string('priority')->toString());
+        }
+
         if ($request->filled('search')) {
             $search = $request->string('search')->toString();
 
